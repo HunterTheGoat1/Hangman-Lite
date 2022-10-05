@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
- 
+            HangmanGame();
         }
         static public void HangmanGame()
         {
@@ -14,6 +14,7 @@
             string word = hangmanWords[randGen.Next(0, hangmanWords.Count)];
             string displayWord = "";
             int wrongGuesses = 0;
+            string guessedLetters = "";
             foreach (char i in word) displayWord += "_";
             while (true)
             {
@@ -25,6 +26,7 @@
                     Console.WriteLine($"You Won! The word was {word}, you guessed {wrongGuesses}/3 letters wrong.");
                     break;
                 }
+                Console.WriteLine($"Guessed letters: {guessedLetters}");
                 MakeHangman(wrongGuesses);
                 if (wrongGuesses == 3)
                 {
@@ -34,12 +36,32 @@
                     Console.WriteLine($"You Lost! The word was {word}");
                     break;
                 }
+                Console.WriteLine(displayWord);
                 while (true)
                 {
                     Console.WriteLine("Guess a letter...");
-                    curGuess = Console.ReadLine();
-                    if (curGuess.Length != 1) Console.WriteLine("Invalid guess.");
-                    else if (displayWord.Contains(curGuess)) Console.WriteLine("Invalid guess.");
+                    curGuess = Console.ReadLine().ToUpper();
+                    if (curGuess.Length != 1 || displayWord.Contains(curGuess) || guessedLetters.Contains(curGuess) || !"ABCDEFGHIJKLMNOPQRSTUVWXYZ".Contains(curGuess)) Console.WriteLine("Invalid guess.");
+                    else break;
+                }
+                if (word.Contains(curGuess))
+                {
+                    int count = 0;
+                    foreach (char i in word)
+                    {
+                        string i2 = Convert.ToString(i);
+                        if (i2 == curGuess)
+                        {
+                            displayWord = displayWord.Remove(count, 1).Insert(count, curGuess);
+                        }
+                        count++;
+                    }
+                }
+                else
+                {
+                    guessedLetters += curGuess;
+                    Console.WriteLine("That letter is not in the word.");
+                    wrongGuesses++;
                 }
             }
         }
