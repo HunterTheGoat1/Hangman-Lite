@@ -16,10 +16,11 @@
             int wrongGuesses = 0;
             string guessedLetters = "";
             foreach (char i in word) displayWord += "_";
-            while (true)
+            bool gameIsOn = true;
+            while (gameIsOn)
             {
                 string curGuess = "";
-                Thread.Sleep(2000);
+                Thread.Sleep(500);
                 Console.Clear();
                 if(displayWord == word)
                 {
@@ -41,10 +42,16 @@
                 {
                     Console.WriteLine("Guess a letter...");
                     curGuess = Console.ReadLine().ToUpper();
-                    if (curGuess.Length != 1 || displayWord.Contains(curGuess) || guessedLetters.Contains(curGuess) || !"ABCDEFGHIJKLMNOPQRSTUVWXYZ".Contains(curGuess)) Console.WriteLine("Invalid guess.");
+                    if (curGuess == word)
+                    {
+                        Console.WriteLine($"You Won! The word was {word}, you guessed {wrongGuesses}/3 letters wrong.");
+                        gameIsOn = false;
+                        break;
+                    }
+                    else if (curGuess.Length != 1 || displayWord.Contains(curGuess) || guessedLetters.Contains(curGuess) || !"ABCDEFGHIJKLMNOPQRSTUVWXYZ".Contains(curGuess)) Console.WriteLine("Invalid guess.");
                     else break;
                 }
-                if (word.Contains(curGuess))
+                if (gameIsOn && word.Contains(curGuess))
                 {
                     int count = 0;
                     foreach (char i in word)
@@ -59,10 +66,13 @@
                 }
                 else
                 {
-                    guessedLetters += curGuess;
-                    Console.WriteLine("That letter is not in the word.");
-                    wrongGuesses++;
+                    if (gameIsOn)
+                    {
+                        Console.WriteLine("That letter is not in the word.");
+                        wrongGuesses++;
+                    }
                 }
+                guessedLetters += curGuess;
             }
         }
         static public void MakeHangman(int stage)
