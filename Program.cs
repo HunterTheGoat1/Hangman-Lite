@@ -94,7 +94,7 @@
         {
             Random randGen = new Random();
             Console.WriteLine("Welcome to Hangman Lite");
-            List<string> hangmanWords = new List<string>() { "COMPUTER","HELLO", "KEYBOARD", "MOUSE", "CHEESE", "PHONE", "WALK", "WINDOW", "CAT", "DOG", "KEYS", "TRUCK", "GRASS", "HANGMAN", "STREET", "TEACHER", "STUDENT", "DEBUG", "PROJECT", "ANALYZE", "COMMIT", "FLOWER", "PAGE", "ESSAY", "COOKING", "TYPING", "CORD", "RAM", "LITE", "NUTRITION", "PROGRAM", "MONKEY", "BLACK", "WHITE", "YELLOW", "KIAN", "HUNTER", "HAT", "DRINK", "WATER", "FIRE", "ASSINGNMENT", "TOOLBOX", "DEEP", "CHANGES", "TRUE", "FALSE" };
+            List<string> hangmanWords = new List<string>() { "COMPUTER","TROLLING","HELLO", "KEYBOARD", "MOUSE", "CHEESE", "PHONE", "WALK", "WINDOW", "CAT", "DOG", "KEYS", "TRUCK", "GRASS", "HANGMAN", "STREET", "TEACHER", "STUDENT", "DEBUG", "PROJECT", "ANALYZE", "COMMIT", "FLOWER", "PAGE", "ESSAY", "COOKING", "TYPING", "CORD", "RAM", "LITE", "NUTRITION", "PROGRAM", "MONKEY", "BLACK", "WHITE", "YELLOW", "KIAN", "HUNTER", "HAT", "DRINK", "WATER", "FIRE", "ASSINGNMENT", "TOOLBOX", "DEEP", "CHANGES", "TRUE", "FALSE" };
             string word = hangmanWords[randGen.Next(0, hangmanWords.Count)];
             string displayWord = "";
             int wrongGuesses = 0;
