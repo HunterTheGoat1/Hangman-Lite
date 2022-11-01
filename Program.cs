@@ -7,8 +7,10 @@
             while (true)
             {
                 Thread.Sleep(1000);
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.Clear();
-                Console.WriteLine("Menu\n-Singleplayer\n-Multiplayer\n-Close");
+                Console.Title = "Hangman Lite | Menu";
+                Console.WriteLine("Menu\n-Singleplayer\n-Multiplayer\n-Close\n\nType Here:");
                 string choice = Console.ReadLine();
                 if (choice.Trim().ToLower().Contains("multi")) MultiHangmanGame();
                 else if (choice.Trim().ToLower().Contains("single")) HangmanGame();
@@ -18,13 +20,14 @@
         }
         static public void MultiHangmanGame()
         {
+            Console.Title = "Hangman Lite | Multi Player";
             Random randGen = new Random();
             Console.WriteLine("Welcome to Hangman Lite");
             Console.WriteLine("What will the word be?");
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = Console.BackgroundColor;
             string word = Console.ReadLine().ToUpper().Trim();
-            Console.BackgroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.ForegroundColor = ConsoleColor.White;
 
             string displayWord = "";
@@ -47,6 +50,7 @@
                 if (wrongGuesses == 3)
                 {
                     Thread.Sleep(500);
+                    Console.BackgroundColor = ConsoleColor.Red;
                     Console.Clear();
                     MakeHangman(4);
                     Console.WriteLine($"You Lost! The word was {word}");
@@ -59,6 +63,8 @@
                     curGuess = Console.ReadLine().ToUpper();
                     if (curGuess == word)
                     {
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.Clear();
                         Console.WriteLine($"You Won! The word was {word}, you guessed {wrongGuesses}/3 letters wrong.");
                         gameIsOn = false;
                         break;
@@ -92,6 +98,7 @@
         }
         static public void HangmanGame()
         {
+            Console.Title = "Hangman Lite | Single Player";
             Random randGen = new Random();
             Console.WriteLine("Welcome to Hangman Lite");
             List<string> hangmanWords = new List<string>() { "COMPUTER","TROLLING","HELLO", "KEYBOARD", "MOUSE", "CHEESE", "PHONE", "WALK", "WINDOW", "CAT", "DOG", "KEYS", "TRUCK", "GRASS", "HANGMAN", "STREET", "TEACHER", "STUDENT", "DEBUG", "PROJECT", "ANALYZE", "COMMIT", "FLOWER", "PAGE", "ESSAY", "COOKING", "TYPING", "CORD", "RAM", "LITE", "NUTRITION", "PROGRAM", "MONKEY", "BLACK", "WHITE", "YELLOW", "KIAN", "HUNTER", "HAT", "DRINK", "WATER", "FIRE", "ASSINGNMENT", "TOOLBOX", "DEEP", "CHANGES", "TRUE", "FALSE" };
@@ -108,6 +115,8 @@
                 Console.Clear();
                 if(displayWord == word)
                 {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                    Console.Clear();
                     Console.WriteLine($"You Won! The word was {word}, you guessed {wrongGuesses}/3 letters wrong.");
                     break;
                 }
@@ -116,6 +125,7 @@
                 if (wrongGuesses == 3)
                 {
                     Thread.Sleep(500);
+                    Console.BackgroundColor = ConsoleColor.Red;
                     Console.Clear();
                     MakeHangman(4);
                     Console.WriteLine($"You Lost! The word was {word}");
